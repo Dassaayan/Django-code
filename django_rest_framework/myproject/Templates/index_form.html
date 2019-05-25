@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registration Form</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+    	<div>
+    	    <label for="name">Name:</label>
+    	    <input type="text" id="name" name="user_name">
+    	</div>
+    	<br>
+    	<div>
+    	    <label for="mail">E-mail:</label>
+    	    <input type="email" id="mail" name="user_mail">
+    	</div>
+    	<br>
+    	<div>
+    	    <label for="Mob. NO.">Mob. NO.:</label>
+    	    <input type="number" id="Mob. NO." name="user_mobile">
+    	</div>
+        <br>
+    	<div>
+    	    <label for="msg">Message:</label>
+    	    <textarea id="msg" name="user_message"></textarea>
+    	</div>
+        <br>
+    	<div class="button">
+    	  <button type="submit">Send your message</button>
+    	</div>
+
+    </form>
+</body>
+</html>
