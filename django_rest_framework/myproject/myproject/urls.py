@@ -20,6 +20,11 @@ from rest_framework .urlpatterns import format_suffix_patterns
 from django.contrib import admin
 from rest_framework import routers
 from poll import views
+from django.contrib import admin
+from django.urls import *
+ 
+from django.conf import settings
+from django.conf.urls import url, include
 
 
 urlpatterns = [
@@ -36,7 +41,9 @@ urlpatterns = [
     url(r'^artists/',views.artist_, name='artist_'),
     url(r'^artistsdetails/(?P<id>\d+)$',views.artistdetails,name='artistdetails'),
     url(r'^artist/create$',views.create_form,name='create_form'),
-    url(r'^detail/create$',views.personal_details_form_,name='personal_details_form'),
-    url(r'^persondetails$',views.persons_details,name='details')
-    
+    url(r'^detail/create$',views.personal_details_form_,name='personal_details_form_'),
+    url(r'^persondetails$',views.persons_details,name='persons_details'),
+    url(r'^javascript/test/page$',views.JS_test),
+    url(r'^personviewSets/api/', include('poll.urls')),
+
 ]

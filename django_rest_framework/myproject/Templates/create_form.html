@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>personal_info_submit</title>
 </head>
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>	
-    </form>
+    <form method="POST">  
+    	{% csrf_token %}
+        <legend>Personal information:</legend><br>
+        First name:{{persondetails.firstname}}<br>
+        <input type="text" name="firstname"><br>
+        Last name:{{persondetails.lastname}}<br>
+        <input type="text" name="lastname"><br>
+        <br>
+        <input type="submit" class="button" name="submit" value="submit" />
+    </form>   
 </body>
 </html>

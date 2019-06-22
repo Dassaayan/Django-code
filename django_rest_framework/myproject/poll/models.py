@@ -19,17 +19,17 @@ class album(models.Model):
     name=models.CharField("album",max_length=50)
     artist=models.ForeignKey(artist) 
 
-class person_details(models.Model):
-	ids=models.IntegerField(primary_key=True)
-	Name=models.CharField(max_length=20)
-	Email_id=models.CharField(max_length=20)
-	Mob_No=models.IntegerField()
-	Message=models.CharField(max_length=200)
-
-
+class persondetails(models.Model):
+    firstname=models.CharField(unique=True,max_length=30)
+    lastname=models.CharField(max_length=20)
+    
+    def __unicode__(self):
+        return self.firstname
+        return self.lastname
 
 class person_details_form(forms.ModelForm):
     class Meta:
-        model=person_details
-        fields=['ids','Name','Email_id','Mob_No','Message']
+        model=persondetails
+        fields='__all__'
+        
 

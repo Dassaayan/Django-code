@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My page</title>
+</head>
+    {% load static %}
+    
+<body>
+    {% csrf_token %}
+    <!---Writing into an HTML element, using innerHTML.
+     Writing into the HTML output using document.write().
+     Writing into an alert box, using window.alert().
+     Writing into the browser console, using console.log()--->
+    <style type="text/css">
+        .button{
+            background-color: gold;
+            border: black;
+            text-align: center;
+            padding: 5px 10px
+            cursor: pointer;
+        }
+    </style>
+    <!---<h1>Javascript used</h1>
+    <p id="Demo">A paragraph that change your mind</p>
+    <p id="demo"> </p>
+    <p id="demo1"></p>
+    <button class='button' type="button" onclick="changable()">Change it</button>
+    <button class='button' type="button" onclick="Notchange()">Change previous</button>
+    <p id="demo2"></p>
+    <form name="myForm" action="" onsubmit="return validateForm()" method="post">
+    Name: <input type="text" name="fname">
+    <input type="submit" value="Submit">
+    </form>
+    <br>
+    <br>
+    <script type="text/Javascript">
+        var d = new Date();
+        document.getElementById("demo2").innerHTML = d.getDate();
+        function changable() {
+            // body...
+            document.getElementById('Demo').innerHTML='Your mind changed'
+            };
+        function Notchange(){
+            document.getElementById('Demo').innerHTML="A paragraph that change your mind"
+        };
+        document.write("How is it?");
+        window.alert("Feel comfortable ???");
+        var array=["Hi","I","am","there"]
+        document.getElementById("demo1").innerHTML=array[0];
+        var person = {
+          firstName: "John",
+          lastName : "Doe",
+          id       : 5566,
+          fullName : function() {
+            document.getElementById("demo").innerHTML=this.firstName + " " + this.lastName;
+          }    
+        };
+        function validateForm() {
+          var x = document.forms["myForm"]["fname"].value;
+          if (x == "") {
+            alert("Name must be filled out");
+            return false;
+          }
+        };
+        person.fullName();  
+    </script>--->
+    <script src="{% static 'main.js' %}"></script>
+    <h2>Thanks</h2>
+</body>
+</html>

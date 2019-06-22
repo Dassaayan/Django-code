@@ -10,6 +10,10 @@ from django.http import HttpResponse,HttpRequest,HttpResponseRedirect
 from django.template import loader,RequestContext
 from poll.models import *
 from django import *
+from rest_framework import viewsets
+from .models import *
+from .serializers import personSerializer
+
 #our view which is a function named index
 
 def artist_(request):
@@ -63,18 +67,29 @@ def Index3(request):
     return HttpResponse(template3.render()) 
 
 def persons_details(request):
-    details=person_details.objects.all()
-    return render_to_response('persondetails.html',{'details':details})    
+    template3 = loader.get_template('person_details.html')
+
+    #rendering the template in HttpResponse
+    return HttpResponse(template3.render()) 
 
 def personal_details_form_(request):
+    #import pdb;pdb.set_trace()
     if request.method=='GET':
+        #import pdb;pdb.set_trace()
         form=person_details_form()
-        return render(request,'create_form.html',{'form': form})
-    elif request.method=='POST':
-        form1=person_details_form(request.POST)
-        form1.save()
+        return render(request,'create_form.html',{'form': form}) 
+    #import pdb;pdb.set_trace()       
+    elif request.method=='POST':  
+        #import pdb;pdb.set_trace()    
+        form=person_details_form(request.POST)
+        form.save()
         return HttpResponseRedirect('/persondetails')
 
+ 
+class personViewSet(viewsets.ModelViewSet):
+    queryset = persondetails.objects.all()
+    serializer_class = personSerializer        
+    
 
 def brown_bear_pics(request):
     template4 = loader.get_template('brown_bear_pics.html')
@@ -87,3 +102,9 @@ def contact(request):
 
     #rendering the template in HttpResponse
     return HttpResponse(template5.render())
+
+def JS_test(request):
+    template6 = loader.get_template('index_js_test.html')
+
+    #rendering the template in HttpResponse
+    return HttpResponse(template6.render())    
