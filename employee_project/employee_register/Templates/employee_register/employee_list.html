@@ -18,6 +18,11 @@
                 <td>{{employee.fullname}}</td>
                 <td>{{employee.mobile}}</td>
                 <td>{{employee.position}}</td>
+                <td>
+                   <a href="{% url 'employee_update' employee.id %}" class="btn text-secondary px-0">
+                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                   </a>    
+                </td>
             </tr>
         {% endfor %}
     </tbody>
