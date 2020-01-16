@@ -21,5 +21,6 @@ from . import views
 urlpatterns = [
     url('form/',views.employee_form,name='employee_insert'),
     url('(?P<id>\d+)/$',views.employee_form,name='employee_update'),
+    url('delete/(?P<id>\d+)',views.employee_delete,name='employee_delete'),
     url('list/',views.employee_list,name='employee_list')
 ]
