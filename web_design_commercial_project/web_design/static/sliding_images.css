@@ -1,0 +1,137 @@
+/*
+Fade content bs-carousel with hero headers
+Code snippet by maridlcrmn (Follow me on Twitter @maridlcrmn) for Bootsnipp.com
+Image credits: unsplash.com
+*/
+
+
+
+.container > col-md-12 text-center::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  -webkit-filter: blur(12px);
+  filter: blur(12px);
+  transform: scale(2) translateY(20px);
+}
+
+
+/********************************/
+/*       Fade Bs-carousel       */
+/********************************/
+.carousel {
+    width: 100% !important;
+    max-height: calc(100vh - 81px);
+    overflow: hidden;
+}
+.carousel .carousel-inner .carousel-item {
+    height: 100vh;
+}
+.carousel .carousel-indicators > li {
+    margin: 0 2px;
+    background-color: #f39c12;
+    border-color: #f39c12;
+    opacity: .7;
+}
+.carousel .carousel-indicators > li.active {
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+/********************************/
+/*          Hero Headers        */
+/********************************/
+.img-responsive {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.75);
+      -webkit-transform: translate3d(-50%,-50%,0);
+         -moz-transform: translate3d(-50%,-50%,0);
+          -ms-transform: translate3d(-50%,-50%,0);
+           -o-transform: translate3d(-50%,-50%,0);
+              transform: translate3d(-50%,-50%,0);
+
+}
+
+/********************************/
+/*       carousel-carousel-item backgrounds     */
+/********************************/
+.carousel,
+.carousel-item img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @media (min-width: 576px) {
+        .container {
+            max-width: 540px;
+            min-height: auto;
+            max-height: auto;
+        }
+    }
+    @media (max-width: 575px) {
+        .container {
+            max-width: 100%;
+            min-height: auto;
+            max-height: auto;
+        }
+    }
+}
+
+
+/* Container holding the image and the text */
+
+/********************************/
+/*          Media Queries       */
+/********************************/
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+
+}
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+
+    }
+
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600rem) {
+  .column {
+    width: 20rem;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
