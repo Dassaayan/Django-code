@@ -19,5 +19,5 @@ from django.conf.urls import url,include
 from . import views
 
 urlpatterns = [
-    url('dashboard/',views.view_web_portal,name='view_web_portal'),
+    url('/',views.view_web_portal,name='view_web_portal'),
 ]
