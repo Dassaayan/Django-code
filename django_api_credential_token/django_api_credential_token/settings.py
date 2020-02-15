@@ -25,7 +25,7 @@ SECRET_KEY = '7r76oa)zl4p8uf)46d#lj&3eq_d)axff&n!b^vkto&*fm$$qc_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0","127.0.0.1"]
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api_credential_token'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
 
 ROOT_URLCONF = 'django_api_credential_token.urls'
 
@@ -74,10 +82,14 @@ WSGI_APPLICATION = 'django_api_credential_token.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': {   # this is the legacy database
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'employeedb',
+        'USER': 'root',
+        'PASSWORD': 'root@123',
+        'HOST': 'localhost',
+        'PORT':''
+    },
 }
 
 
