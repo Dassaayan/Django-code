@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>artists</title>
+    <title>Year_formed</title>
+</head>
+<body>
+    <h2>artists</h2>
+    <ul>
+    	{% for Artist in artist_ %}
+    	<li>
+    		{{ Artist.name }}
+        </li>
+                    
+        {% endfor %}
+    </ul>   
+</body>
+</html>
