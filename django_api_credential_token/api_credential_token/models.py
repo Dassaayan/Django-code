@@ -9,13 +9,6 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-for user in User.objects.all():
-    token=Token.objects.get_or_create(user=user)
-    print(token.key)
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 

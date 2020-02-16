@@ -31,6 +31,7 @@ urlpatterns = [
         views.employeeFilteredViewSet.as_view({'get': 'employee_filtered'}), name='employee_filtered'),
     url(r'^employeeview/api/employee/salary/emp_id=(?P<id>\d+)', 
         views.employeeFilteredSalaryViewSet.as_view({'get': 'employee_salary_filtered'}), name='employee_salary_filtered'),
+    url('employeeviewSets/api/login', views.login),
  ]     
 
 

@@ -1,7 +1,5 @@
 from __future__ import unicode_literals
-
 from django.shortcuts import render,render_to_response
-
 # Create your views here.
 from django.http import HttpResponse,HttpRequest,HttpResponseRedirect
 #importing loading from django template 
@@ -16,10 +14,34 @@ from collections import OrderedDict
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated 
-from rest_framework.decorators import list_route
+from rest_framework.permissions import IsAuthenticated,AllowAny 
+from rest_framework.decorators import list_route,api_view, permission_classes
 from rest_framework.response import Response
  # <-- Here
+from django.contrib.auth import authenticate
+from django.views.decorators.csrf import csrf_exempt 
+from rest_framework.status import (
+    HTTP_400_BAD_REQUEST,
+    HTTP_404_NOT_FOUND,
+    HTTP_200_OK
+)
+#Now we write login function which returns the token associated with the user and make api route for the same using.
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def login(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+    if username is None or password is None:
+        return Response({'error': 'Please provide both username and password'},
+                        status=HTTP_400_BAD_REQUEST)
+    user = authenticate(username=username, password=password)
+    if not user:
+        return Response({'error': 'Invalid Credentials'},
+                        status=HTTP_404_NOT_FOUND)
+    token, _ = Token.objects.get_or_create(user=user)
+    return Response({'token': token.key},
+                    status=HTTP_200_OK)
 
 # Create your views here.
 class modify_data_api:
@@ -61,7 +83,7 @@ class employeeViewSet(viewsets.ModelViewSet):
     # import pdb;pdb.set_trace()
     queryset = EmployeeDetails.objects.all()
     serializer_class = Employee_DetailsSerializer
-
+            
 class employeeFilteredViewSet(viewsets.ModelViewSet):
     #import pdb;pdb.set_trace()
     # permission_classes = (IsAuthedumpsnticated,)
@@ -70,8 +92,19 @@ class employeeFilteredViewSet(viewsets.ModelViewSet):
     @list_route()
     def employee_filtered(self, request, id=None):
         #serializers.serialize('json', self.queryset)
-        serializer_employees = self.get_serializer(self.queryset.filter(employee_id=id), many=True)
-        return Response(modify_data_api().modify_API(json.dumps(serializer_employees.data)))
+        username = request.data.get("username")
+        password = request.data.get("password")
+        if username is None or password is None:
+            return Response({'error': 'Please provide both username and password'},
+                            status=HTTP_400_BAD_REQUEST)
+        user = authenticate(username=username, password=password)
+        if not user:
+            return Response({'error': 'Invalid Credentials'},
+                            status=HTTP_404_NOT_FOUND)
+        serializer_employees = self.get_serializer(self.queryset.filter(employee_id=id), many=True)    
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response(modify_data_api().modify_API(json.dumps(serializer_employees.data)),
+                        status=HTTP_200_OK)
 
 class employeeFilteredSalaryViewSet(viewsets.ModelViewSet):
     #import pdb;pdb.set_trace()
