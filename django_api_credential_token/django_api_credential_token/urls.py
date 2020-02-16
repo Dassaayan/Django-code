@@ -27,9 +27,10 @@ from django.conf import settings
 urlpatterns = [
 
     url(r'^employeeviewSets/api',include('api_credential_token.urls')) ,
-    # url(r'^employeeviewSets/api/employee/(?P<id>\d+)', 
-    # 	views.employeeFilteredViewSet.as_view({'get': 'employee_filtered'}), name='employee_filtered'),
+    url(r'^employeeviewSets/api/employee/id=(?P<id>\d+)', 
+        views.employeeFilteredViewSet.as_view({'get': 'employee_filtered'}), name='employee_filtered'),
+    url(r'^employeeview/api/employee/salary/emp_id=(?P<id>\d+)', 
+        views.employeeFilteredSalaryViewSet.as_view({'get': 'employee_salary_filtered'}), name='employee_salary_filtered'),
  ]     
 
-   
-#(?P<id>\d+)Token cc82567f00d6bf451d34fcaee9d7efb8ee4d58ee
+

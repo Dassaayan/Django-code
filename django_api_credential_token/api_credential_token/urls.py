@@ -4,6 +4,7 @@ from api_credential_token.views import *
 
 router = routers.DefaultRouter()
 router.register(r'details',employeeViewSet)
-# router.register(r'employee/details',employeeFilteredViewSet)
+router.register(r'employee/details',employeeFilteredViewSet)
+router.register(r'employee/details/salary',employeeFilteredSalaryViewSet)
  
 urlpatterns = router.urls

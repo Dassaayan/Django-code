@@ -132,12 +132,12 @@ class Employee(models.Model):
 
 
 class EmployeeDetails(models.Model):
-    employee_addr = models.CharField(max_length=1000, blank=True, null=True,verbose_name="Employee_Addr.")
-    employee_mobile_number = models.IntegerField(blank=True, null=True,verbose_name="Employee_contact_No.")
+    employee_addr = models.CharField(max_length=1000, blank=True, null=True,verbose_name="Employee_Addr")
+    employee_mobile_number = models.IntegerField(blank=True, null=True,verbose_name="Employee_contact_No")
     employee_designation = models.CharField(max_length=1000, blank=True, null=True,verbose_name="Post")
     employee_city = models.CharField(max_length=500, blank=True, null=True,verbose_name="City")
     employee_blood_grp = models.CharField(db_column='employee_Blood_grp', max_length=200, blank=True, null=True,
-                         verbose_name="Blood Group")  # Field name made lowercase.
+                         verbose_name="Blood_Group")  # Field name made lowercase.
     employee = models.ForeignKey(Employee, models.DO_NOTHING, blank=True, null=True,verbose_name="Employee_ID")
     id = models.IntegerField(primary_key=True,verbose_name="ID")
     doj = models.ForeignKey('EmployeeSalary', models.DO_NOTHING, db_column='DOJ', blank=True, null=True,

@@ -3,22 +3,30 @@ from rest_framework import serializers,fields
 
 class employeeSerializer(serializers.ModelSerializer):
     #import pdb;pdb.set_trace()
+    Employee_Name=serializers.CharField(source='employee_name')
+    Employee_ID=serializers.CharField(source='employee_id')
     class Meta:
         model =Employee
-        fields =['employee_id','employee_name']
+        fields =['Employee_ID','Employee_Name']
 
 
 class Employee_SalarySerializer(serializers.ModelSerializer):
+    employee=employeeSerializer()
     class Meta:
         model =EmployeeSalary
-        fields=['employee_salary_monthly']        
+        fields=['employee','employee_salary_monthly']        
 
 
 class Employee_DetailsSerializer(serializers.ModelSerializer):
+    Employee_Addr=serializers.CharField(source='employee_addr')
+    Employee_contact_No=serializers.CharField(source='employee_mobile_number')     
+    Post=serializers.CharField(source='employee_designation')   
+    City=serializers.CharField(source='employee_city') 
+    Blood_Group=serializers.CharField(source='employee_blood_grp') 
     employee=employeeSerializer()
-    # emp_sal=Employee_SalarySerializer()
     class Meta:
         model=EmployeeDetails
-        fields=['id','employee','employee_addr','employee_mobile_number','employee_designation','employee_city','employee_blood_grp',
-               'doj']
-        depth=1 
+        fields=['id','employee','Employee_Addr','Employee_contact_No','Post'
+                  ,'City','Blood_Group','doj']                 
+
+        
