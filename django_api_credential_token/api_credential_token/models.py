@@ -141,13 +141,17 @@ class EmployeeDetails(models.Model):
     employee = models.ForeignKey(Employee, models.DO_NOTHING, blank=True, null=True,verbose_name="Employee_ID")
     id = models.IntegerField(primary_key=True,verbose_name="ID")
     doj = models.ForeignKey('EmployeeSalary', models.DO_NOTHING, db_column='DOJ', blank=True, null=True,
-                         verbose_name="Date of Joining")  # Field name made lowercase.
+                         verbose_name="Date of Joining")  # Field name made lowercase
+
+    # @property
+    # def date_of_join(self):
+    #     return self.doj
 
     class Meta:
         managed = False
         db_table = 'employee_details'
-        ordering=['employee','employee_addr','employee_designation','employee_mobile_number','employee_city','doj'
-                 ,'employee_blood_grp']  
+        ordering=['employee','employee_addr','employee_designation','employee_mobile_number','employee_city'
+                 ,'employee_blood_grp'] 
 
 class EmployeeSalary(models.Model):
     employee = models.ForeignKey(Employee, models.DO_NOTHING, blank=True, null=True,verbose_name="Employee_ID")
@@ -159,4 +163,4 @@ class EmployeeSalary(models.Model):
     class Meta:
         managed = False
         db_table = 'employee_salary'
-        ordering=['employee_salary_monthly','doj']
+        ordering=['id','employee','employee_salary_monthly','doj']
