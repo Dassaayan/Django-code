@@ -2,21 +2,16 @@ from __future__ import unicode_literals
 from django.shortcuts import render,render_to_response
 # Create your views here.
 from django.http import HttpResponse,HttpRequest,HttpResponseRedirect
-#importing loading from django template 
 from django.template import loader,RequestContext
-from django import *
 from rest_framework import viewsets
-from .models import *
 from django.core import serializers
 from .serializers import *
 import json
 from collections import OrderedDict
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated,AllowAny 
 from rest_framework.decorators import list_route,api_view, permission_classes,action
-from rest_framework.response import Response
  # <-- Here
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt 
