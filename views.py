@@ -80,16 +80,20 @@ class modify_data_api:
 
 class employeeViewSet(viewsets.ModelViewSet):
     #permission_classes = (IsAuthenticated,)
-    import pdb;pdb.set_trace()
+    #import pdb;pdb.set_trace()
     queryset = EmployeeDetails.objects.all()
     serializer_class = Employee_DetailsSerializer  
     @list_route()
-    def get_set(self,request,id=None):
-        import pdb;pdb.set_trace()
-        serializer_employees = self.get_serializer(self.queryset, many=True)
-        if self.request.GET.get('Authorization')=="Token Xapi_key": 
-            return Response(json.dumps(serializer_employees.data),
+    def get_set(self,request,string=None):
+        #import pdb;pdb.set_trace()
+        if string=="true":
+            serializer_employees = self.get_serializer(self.queryset, many=True)
+        if self.request.GET.get('Authorization')=="Token Xapi_key":
+            return Response(serializer_employees.data,
                         status=HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid Token'},
+                            status=HTTP_404_NOT_FOUND)
       
             
 class employeeFilteredViewSet(viewsets.ModelViewSet):
