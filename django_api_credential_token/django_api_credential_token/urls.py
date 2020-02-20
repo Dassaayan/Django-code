@@ -26,7 +26,7 @@ from django.conf import settings
 
 urlpatterns = [
 
-    url(r'^employeeviewSets/api',include('api_credential_token.urls')) ,
+    url(r'^employeeviewSets/api/details=(?P<string>\w+)',views.employeeViewSet.as_view({'get':'get_set'}),name='get_set') ,
     url(r'^employeeviewSets/api/employee/id=(?P<id>\d+)', 
         views.employeeFilteredViewSet.as_view({'get': 'employee_filtered'}), name='employee_filtered'),
     url(r'^employeeview/api/employee/salary/emp_id=(?P<id>\d+)', 

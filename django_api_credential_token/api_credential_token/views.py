@@ -2,21 +2,17 @@ from __future__ import unicode_literals
 from django.shortcuts import render,render_to_response
 # Create your views here.
 from django.http import HttpResponse,HttpRequest,HttpResponseRedirect
-#importing loading from django template 
 from django.template import loader,RequestContext
-from django import *
-from rest_framework import viewsets
-from .models import *
+from rest_framework import viewsets,permissions,authentication
 from django.core import serializers
 from .serializers import *
 import json
 from collections import OrderedDict
-from rest_framework.decorators import api_view
+from rest_framework.authentication import TokenAuthentication 
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated,AllowAny 
-from rest_framework.decorators import list_route,api_view, permission_classes
-from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.decorators import list_route,api_view, permission_classes,action
  # <-- Here
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt 
@@ -79,14 +75,23 @@ class modify_data_api:
         return [Ordereddict]            
 
 class employeeViewSet(viewsets.ModelViewSet):
-    # permission_classes = (IsAuthenticated,)
-    # import pdb;pdb.set_trace()
+    permission_classes=(IsAuthenticated,)
     queryset = EmployeeDetails.objects.all()
-    serializer_class = Employee_DetailsSerializer
+    serializer_class = Employee_DetailsSerializer  
+    @list_route()
+    def get_set(self,request,string=None):
+        #import pdb;pdb.set_trace()
+        if string=="true":
+            serializer_employees = self.get_serializer(self.queryset, many=True)
+        if self.request.GET.get('Authorization')=="Token Xapi_key":
+            return Response(serializer_employees.data,
+                        status=HTTP_200_OK)
+        else:
+            return Response({'error': 'Invalid Parameters'},
+                            status=HTTP_404_NOT_FOUND)
+
             
 class employeeFilteredViewSet(viewsets.ModelViewSet):
-    #import pdb;pdb.set_trace()
-    # permission_classes = (IsAuthedumpsnticated,)
     queryset = EmployeeDetails.objects.all()
     serializer_class = Employee_DetailsSerializer
     @list_route()
@@ -107,13 +112,15 @@ class employeeFilteredViewSet(viewsets.ModelViewSet):
                         status=HTTP_200_OK)
 
 class employeeFilteredSalaryViewSet(viewsets.ModelViewSet):
-    #import pdb;pdb.set_trace()
-    # permission_classes = (IsAuthenticated,)
     queryset = EmployeeSalary.objects.all()
     serializer_class = Employee_SalarySerializer
     @list_route()
     def employee_salary_filtered(self, request, id=None):
         #serializers.serialize('json', self.queryset)
         #import pdb;pdb.set_trace()
-        serializer_employees = self.get_serializer(self.queryset.filter(employee=id), many=True)
-        return Response(modify_data_api().modify_API_salary(json.dumps(serializer_employees.data)))        
+        if request.GET.get('Authorization')=="Token Xapi_key":
+            serializer_employees = self.get_serializer(self.queryset.filter(employee=id), many=True)
+            return Response(modify_data_api().modify_API_salary(json.dumps(serializer_employees.data)))
+        else:
+            return Response({'error': 'Invalid Token'},
+                            status=HTTP_404_NOT_FOUND)
