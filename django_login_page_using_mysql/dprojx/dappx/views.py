@@ -24,7 +24,9 @@ def register(request):
         user_form = userform(data=request.POST)
         profile_form = userprofileinfoform(data=request.POST)
         if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
+            password = user_form.cleaned_data['password']
+            user.set_password(password)
             user.save()
             profile = profile_form.save(commit=False)
             profile.user = user
@@ -45,10 +47,9 @@ def register(request):
 
 def user_login(request):
     if request.method == 'POST':
-        import pdb;pdb.set_trace()
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
         if user:
             if user.is_active:
                 login(request,user)
