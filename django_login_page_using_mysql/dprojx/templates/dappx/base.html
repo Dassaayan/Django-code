@@ -20,6 +20,9 @@
 				<li>
 					<a class="navbar-link" href="{% url 'dappx:register' %}">Register</a>
 				</li>
+				<li>
+					<a class = "navbar-link" href="{% url 'password_reset' %}">Password Reset<i class="mdi mdi-key-change:"></i></a>
+				</li>
 <!-- 				{# Some logic on what to display for last item#} -->
                 {% if user.is_authenticated %}
                 <li>
