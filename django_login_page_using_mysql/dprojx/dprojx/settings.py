@@ -31,11 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # during development only
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -132,3 +128,14 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 LOGIN_URL = '/dappx/user_login/'
+
+#SMTP config.
+
+if DEBUG:
+    #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # during development & console only
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # during development & smtp mail only
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'saayan8981@gmail.com'
+    EMAIL_HOST_PASSWORD = '************'

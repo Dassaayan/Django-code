@@ -9,9 +9,10 @@
           {# A more "HTML" way of creating the login form#}
           <label for="username">Username:</label>
           <input type="text" name="username" placeholder="Username">
-   		  <label for="password">Password:</label>
+   		    <label for="password">Password:</label>
           <input type="password" name="password" placeholder="Password">
           <input type="submit" name="" value="Login">
+          <a href="{% url 'password_reset' %}">Forget Password?<i class="mdi mdi-key-change:"></i></a>
           
 		</form>
 	</div>
